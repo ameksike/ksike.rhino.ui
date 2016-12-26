@@ -1,6 +1,6 @@
 /**
  *
- * @package: oop
+ * @package: koop
  * @version: 0.1
  * @description: Class es una libreria para el trabajo con clases, pretende acercar el javascript al paradigma de POO
  * @authors: ing. Antonio Membrides Espinosa
@@ -10,13 +10,14 @@
  * @license: GPL v2
  *
  */
-var koop = {
+var sco = typeof(global) != "undefined" ? global : window;
+sco.koop = {
 	class: function(){
 		var _this = koop.class.prototype;
         return _this.factory(arguments);
 	},
 	namespace: function(strns, owner){
-		var ons = owner || window;
+		var ons = owner || sco;
 		var lns = this.isString(strns) ? strns.split(".") : strns;
 		for(var i in lns){
             ons[lns[i]] = (ons[lns[i]]) ? ons[lns[i]] : {};
@@ -68,7 +69,7 @@ koop.class.prototype = {
         if(_ns.length>0){
             _ns = this.assist.namespace(_ns);
             _ns[_cn] = _class;
-        }else window[_cn] = _class;
+        }else sco[_cn] = _class;
     },
 	trigger: function(key, scope, params){
 		for(var i in this.event[key])
@@ -86,7 +87,7 @@ koop.class.prototype = {
 		};
         this.trigger('preBuild', this, [_namespace, _prototype]);
         _class.prototype = this.build(_prototype);
-		this.locate(_class, _namespace);
+		if(_namespace) this.locate(_class, _namespace);
         this.trigger('posBuild', this, [_namespace, _class]);
         return _class;
 	}

@@ -4,7 +4,7 @@
  * @version: 0.1
  * @description: Graphical User Interface framework
  * @authors: ing. Antonio Membrides Espinosa
- * @require: Bootstrap, JQuery, OOP
+ * @require: Bootstrap, JQuery, KOOP
  * @made: 28/04/2014
  * @update: 05/05/2014
  * @license: LGPL v2
@@ -104,7 +104,7 @@ var Ksui = {
                     })(setters[i], score, callback, params);
                 }
             }
-            this.class = oop.class;
+            this.class = koop.class;
         }
     }
 }
